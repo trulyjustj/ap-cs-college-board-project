@@ -1,11 +1,24 @@
  
 
 
+> Open this page at [https://trulyjustj.github.io/ap-cs-college-board-project/](https://trulyjustj.github.io/ap-cs-college-board-project/)
 
+## Use as Extension
 
-## AP Computer Science
+This repository can be added as an **extension** in MakeCode.
 
-AP Computer Science College Board Submission Project
+* open [https://arcade.makecode.com/](https://arcade.makecode.com/)
+* click on **New Project**
+* click on **Extensions** under the gearwheel menu
+* search for **https://github.com/trulyjustj/ap-cs-college-board-project** and import
+
+## Edit this project ![Build status badge](https://github.com/trulyjustj/ap-cs-college-board-project/workflows/MakeCode/badge.svg)
+
+To edit this repository in MakeCode.
+
+* open [https://arcade.makecode.com/](https://arcade.makecode.com/)
+* click on **Import** then click on **Import URL**
+* paste **https://github.com/trulyjustj/ap-cs-college-board-project** and click import
 
 ## Blocks preview
 
@@ -13,12 +26,6 @@ This image shows the blocks code from the last commit in master.
 This image may take a few minutes to refresh.
 
 ![A rendered view of the blocks](https://github.com/trulyjustj/ap-cs-college-board-project/raw/master/.github/makecode/blocks.png)
-
-
-
-> Open this page at [https://trulyjustj.github.io/ap-cs-college-board-project/](https://trulyjustj.github.io/ap-cs-college-board-project/)
-
-
 
 #### Metadata (used for search, rendering)
 
