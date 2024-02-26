@@ -1,3 +1,18 @@
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+	
+})
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+	
+})
+function enemyspawn (boss: boolean) {
+    if (true) {
+    	
+    } else {
+        for (let index = 0; index < 4; index++) {
+        	
+        }
+    }
+}
 scene.setBackgroundImage(img`
     bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
     bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
@@ -120,6 +135,8 @@ scene.setBackgroundImage(img`
     bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
     bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
     `)
+tiles.setCurrentTilemap(tilemap`startingroom`)
+let rooms = [tilemap`room2`, tilemap`room3`, tilemap`room4`]
 let mySprite = sprites.create(img`
     . . . . . . f f f f . . . . . . 
     . . . . f f f 2 2 f f f . . . . 
@@ -138,4 +155,9 @@ let mySprite = sprites.create(img`
     . . . . . f f f f f f . . . . . 
     . . . . . f f . . f f . . . . . 
     `, SpriteKind.Player)
+scene.cameraFollowSprite(mySprite)
+mySprite.setPosition(30, 228)
 controller.moveSprite(mySprite)
+game.onUpdateInterval(5000, function () {
+    enemyspawn(true)
+})
