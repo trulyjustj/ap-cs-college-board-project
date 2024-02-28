@@ -27,6 +27,7 @@ info.onLifeZero(function () {
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleInsignia, function (sprite, location) {
     tiles.setCurrentTilemap(rooms.shift())
     enemybosssprite = sprites.create(enemyboss.shift(), SpriteKind.Enemy)
+    boss = 1
     key = 1
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.stairSouth, function (sprite, location) {
@@ -42,6 +43,7 @@ let enemybosssprite: Sprite = null
 let enemyboss: Image[] = []
 let enemysprites: Image[] = []
 let rooms: tiles.TileMapData[] = []
+let boss = 0
 let spawn: tiles.Location[] = []
 scene.setBackgroundImage(img`
     bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
@@ -168,7 +170,7 @@ scene.setBackgroundImage(img`
 tiles.setCurrentTilemap(tilemap`startingroom`)
 info.setLife(3)
 spawn = tiles.getTilesByType(sprites.dungeon.darkGroundCenter)
-let boss = 1
+boss = 1
 rooms = [tilemap`room2`, tilemap`room3`, tilemap`room4`]
 enemysprites = [img`
     . . f f f . . . . . . . . . . . 
