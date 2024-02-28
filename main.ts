@@ -1,3 +1,6 @@
+namespace SpriteKind {
+    export const weapon = SpriteKind.create()
+}
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
 	
 })
@@ -6,20 +9,40 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 function enemyspawn (boss: boolean) {
     if (true) {
-    	
-    } else {
         for (let index = 0; index < 4; index++) {
-        	
+            let list: number[] = []
+            mySprite2 = sprites.create(enemysprites._pickRandom(), SpriteKind.Enemy)
+            tiles.placeOnTile(mySprite2, spawn.removeAt(randint(0, list.length - 1)))
+            mySprite2.setVelocity(randint(-50, 50), randint(-50, 50))
+            mySprite2.setBounceOnWall(true)
         }
+    } else {
+        tiles.setTileAt(tiles.getTileLocation(7, 0), sprites.dungeon.collectibleInsignia)
+        tiles.setTileAt(tiles.getTileLocation(8, 0), sprites.dungeon.collectibleInsignia)
     }
 }
+info.onLifeZero(function () {
+    game.gameOver(false)
+})
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleInsignia, function (sprite, location) {
     tiles.setCurrentTilemap(rooms.shift())
-    enemybosssprite = enemyboss.shift()
+    enemybosssprite = sprites.create(enemyboss.shift(), SpriteKind.Enemy)
+    key = 1
 })
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.stairSouth, function (sprite, location) {
+	
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+    info.changeLifeBy(-1)
+    pause(1000)
+})
+let key = 0
+let mySprite2: Sprite = null
 let enemybosssprite: Sprite = null
-let enemyboss: Sprite[] = []
+let enemyboss: Image[] = []
+let enemysprites: Image[] = []
 let rooms: tiles.TileMapData[] = []
+let spawn: tiles.Location[] = []
 scene.setBackgroundImage(img`
     bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
     bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
@@ -143,8 +166,11 @@ scene.setBackgroundImage(img`
     bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
     `)
 tiles.setCurrentTilemap(tilemap`startingroom`)
+info.setLife(3)
+spawn = tiles.getTilesByType(sprites.dungeon.darkGroundCenter)
+let boss = 1
 rooms = [tilemap`room2`, tilemap`room3`, tilemap`room4`]
-let enemysprites = [sprites.create(img`
+enemysprites = [img`
     . . f f f . . . . . . . . . . . 
     f f f c c . . . . . . . . f f f 
     f f c c . . c c . . . f c b b c 
@@ -161,7 +187,7 @@ let enemysprites = [sprites.create(img`
     . . . f f f f f f f . . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
-    `, SpriteKind.Player), sprites.create(img`
+    `, img`
     . . . . c c c c c c . . . . . . 
     . . . c 6 7 7 7 7 6 c . . . . . 
     . . c 7 7 7 7 7 7 7 7 c . . . . 
@@ -178,7 +204,7 @@ let enemysprites = [sprites.create(img`
     f 6 1 1 1 1 1 6 6 6 6 6 c f . . 
     . f 6 1 1 1 1 1 1 6 6 6 f . . . 
     . . c c c c c c c c c f . . . . 
-    `, SpriteKind.Player), sprites.create(img`
+    `, img`
     ....................
     ....................
     ........ffff........
@@ -199,62 +225,10 @@ let enemysprites = [sprites.create(img`
     .........fff........
     ....................
     ....................
-    `, SpriteKind.Enemy)]
-enemyboss = [sprites.create(img`
-    ...................................
-    ...................................
-    ...................................
-    ...................................
-    ..........444444444444444..........
-    ..........4ddddddddddddd44.........
-    ..........4dddddddddddddd4.........
-    .........4ddddddddddddddd4.........
-    .........4ddddccddddccdd4..........
-    ........44ddddccddddccdd4..........
-    ........4dddddccddddccdd4..........
-    ........4dddddddddddccdd4..........
-    ........44dddddddddddddd4..........
-    .........4dddddddddddddd4..........
-    .........4ddddbbbbbbbddd44.........
-    .........44dddbdddddbdddd4.........
-    ..........44dddddddddddd44.........
-    ........44444444444444444..........
-    .......4466666666666666644444......
-    .....446666666666666666666664......
-    .....4ddd666666666666666666d44.....
-    .....4dddd6666666666666666ddd4.....
-    .....4ddddd446666666666646ddd44....
-    .....4ddddd446666666666644dddd4....
-    .....4ddddd448888888888844dddd4....
-    .....4dddd4448888888888844dddd4....
-    .....44dd44.48888444888844ddd44....
-    ......4444..488884.44888444444.....
-    ............488884..48884..........
-    ............488884..48884..........
-    ............448844..44444..........
-    .............4444..................
-    ...................................
-    ...................................
-    ...................................
-    `, SpriteKind.Player), sprites.create(img`
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    `, SpriteKind.Player)]
-enemybosssprite = enemyboss.shift()
+    `]
+enemyboss = [assets.image`boss1`, assets.image`boss2`]
+enemybosssprite = sprites.create(enemyboss.shift(), SpriteKind.Enemy)
+enemybosssprite.setPosition(78, 125)
 let mySprite = sprites.create(img`
     . . . . . . f f f f . . . . . . 
     . . . . f f f 2 2 f f f . . . . 
@@ -276,6 +250,14 @@ let mySprite = sprites.create(img`
 scene.cameraFollowSprite(mySprite)
 mySprite.setPosition(30, 228)
 controller.moveSprite(mySprite)
-game.onUpdateInterval(5000, function () {
-    enemyspawn(true)
+forever(function () {
+	
+})
+game.onUpdateInterval(20000, function () {
+    if (boss == 1) {
+        enemyspawn(true)
+    } else {
+        key = 1
+        enemyspawn(false)
+    }
 })
