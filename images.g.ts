@@ -125,6 +125,25 @@ cb9111111111999999999999999999c..
 ...ffff..f99cc.............c999c.
 .........fffc..............cccc..
 `;
+            case "image3":
+            case "enemycamp":return img`
+f f f f f f f f f f f f f f f f 
+f . . f . . f . . f . . f . . f 
+f . . f . . f . . f . 4 f . . f 
+f f f f f f f f f f f f f f f f 
+f . . f . 4 f . . f . . f . . f 
+f . . f . . f . . f . . f . . f 
+f f f f f f f f f f f f f f f f 
+f . . f 4 . f . 4 f . . f . . f 
+f . . f . . f . . f . . f 4 . f 
+f f f f f f f f f f f f f f f f 
+f . . f . . f . . f . . f . . f 
+f . . f . 4 f . . f 4 . f . . f 
+f f f f f f f f f f f f f f f f 
+f . 4 f . . f . . f . . f . . f 
+f . . f . . f . . f . . f . . f 
+f f f f f f f f f f f f f f f f 
+`;
         }
         return null;
     })
