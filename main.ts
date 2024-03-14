@@ -2,6 +2,7 @@ namespace SpriteKind {
     export const princess1 = SpriteKind.create()
     export const princess2 = SpriteKind.create()
 }
+// From My Teacher Mr. Florczak
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     if (jump < 2) {
         jump += 1
@@ -9,13 +10,14 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     }
     pause(1000)
 })
+// From My Teacher Mr. Florczak
 scene.onHitWall(SpriteKind.Player, function (sprite, location) {
     if (!(mySprite.isHittingTile(CollisionDirection.Top))) {
         jump = 0
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.princess1, function (sprite, otherSprite) {
-    sprites.destroy(princess12, effects.hearts, 500)
+    sprites.destroy(princessONE, effects.hearts, 500)
     princess1rescued = 1
     if (princess1rescued == princess2rescued) {
         princessrescued(true)
@@ -100,7 +102,7 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     )
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.princess2, function (sprite, otherSprite) {
-    sprites.destroy(princess22, effects.hearts, 500)
+    sprites.destroy(princessTWO, effects.hearts, 500)
     princess2rescued = 1
     if (princess1rescued == princess2rescued) {
         princessrescued(true)
@@ -193,7 +195,7 @@ function princessrescued (endlevel: boolean) {
     } else {
         for (let index = 0; index < 10; index++) {
             animation.runImageAnimation(
-            princess12,
+            princessONE,
             [img`
                 2 . 2 . 2 2 2 . 2 . . . 2 2 2 . 
                 2 . 2 . 2 f 5 5 2 f f . 2 . 2 . 
@@ -250,7 +252,7 @@ function princessrescued (endlevel: boolean) {
             false
             )
             animation.runImageAnimation(
-            princess22,
+            princessTWO,
             [img`
                 2 . 2 . 2 2 2 4 2 f f . 2 2 2 . 
                 2 . 2 . 2 5 4 5 2 4 5 f 2 . 2 . 
@@ -329,7 +331,7 @@ function princessrescued (endlevel: boolean) {
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleInsignia, function (sprite, location) {
     tiles.setCurrentTilemap(levels.shift())
     mySprite.setPosition(30, 228)
-    princess12 = sprites.create(img`
+    princessONE = sprites.create(img`
         . . . . . . 5 . 5 . . . . . . . 
         . . . . . f 5 5 5 f f . . . . . 
         . . . . f 1 5 2 5 1 6 f . . . . 
@@ -347,8 +349,8 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleInsignia, func
         . . . f f f f f f f f f f . . . 
         . . . . . f f . . f f . . . . . 
         `, SpriteKind.princess1)
-    tiles.placeOnTile(princess12, tiles.getTileLocation(1, 9))
-    princess22 = sprites.create(img`
+    tiles.placeOnTile(princessONE, tiles.getTileLocation(1, 9))
+    princessTWO = sprites.create(img`
         . . . . . f f 4 4 f f . . . . . 
         . . . . f 5 4 5 5 4 5 f . . . . 
         . . . f e 4 5 5 5 5 4 e f . . . 
@@ -366,7 +368,7 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleInsignia, func
         . . . f f 1 d 1 d 1 d f f . . . 
         . . . . . f f b b f f . . . . . 
         `, SpriteKind.princess2)
-    tiles.placeOnTile(princess22, tiles.getTileLocation(7, 7))
+    tiles.placeOnTile(princessTWO, tiles.getTileLocation(7, 7))
     princess1rescued = 0
     princess2rescued = 0
     tiles.setTileAt(tiles.getTileLocation(13, 1), assets.tile`transparency16`)
@@ -377,8 +379,8 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleInsignia, func
 let princess2rescued = 0
 let princess1rescued = 0
 let jump = 0
-let princess22: Sprite = null
-let princess12: Sprite = null
+let princessTWO: Sprite = null
+let princessONE: Sprite = null
 let mySprite: Sprite = null
 let levels: tiles.TileMapData[] = []
 scene.setBackgroundImage(img`
@@ -640,7 +642,8 @@ scene.setBackgroundImage(img`
     bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
     `)
 tiles.setCurrentTilemap(tilemap`startingroom`)
-levels = [tilemap`room2`, tilemap`room3`, tilemap`room4`]
+game.splash("SAVE THE PRINCESSES")
+levels = [tilemap`room2`, tilemap`room3`, tilemap`level27`]
 mySprite = sprites.create(img`
     . . . . . . f f f f . . . . . . 
     . . . . f f f 2 2 f f f . . . . 
@@ -659,7 +662,7 @@ mySprite = sprites.create(img`
     . . . . . f f f f f f . . . . . 
     . . . . . f f . . f f . . . . . 
     `, SpriteKind.Player)
-princess12 = sprites.create(img`
+princessONE = sprites.create(img`
     . . . . . . 5 . 5 . . . . . . . 
     . . . . . f 5 5 5 f f . . . . . 
     . . . . f 1 5 2 5 1 6 f . . . . 
@@ -677,8 +680,8 @@ princess12 = sprites.create(img`
     . . . f f f f f f f f f f . . . 
     . . . . . f f . . f f . . . . . 
     `, SpriteKind.princess1)
-tiles.placeOnTile(princess12, tiles.getTileLocation(1, 9))
-princess22 = sprites.create(img`
+tiles.placeOnTile(princessONE, tiles.getTileLocation(1, 9))
+princessTWO = sprites.create(img`
     . . . . . f f 4 4 f f . . . . . 
     . . . . f 5 4 5 5 4 5 f . . . . 
     . . . f e 4 5 5 5 5 4 e f . . . 
@@ -696,11 +699,13 @@ princess22 = sprites.create(img`
     . . . f f 1 d 1 d 1 d f f . . . 
     . . . . . f f b b f f . . . . . 
     `, SpriteKind.princess2)
-tiles.placeOnTile(princess22, tiles.getTileLocation(7, 7))
+tiles.placeOnTile(princessTWO, tiles.getTileLocation(7, 7))
 controller.moveSprite(mySprite, 100, 0)
+// From My Teacher Mr. Florczak
 mySprite.ay = 300
 mySprite.setPosition(30, 228)
 scene.cameraFollowSprite(mySprite)
+// From My Teacher Mr. Florczak
 jump = 0
 namespace userconfig {
     export const ARCADE_SCREEN_WIDTH = 256
